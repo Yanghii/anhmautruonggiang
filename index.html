@@ -1183,9 +1183,16 @@
             <p class="text-[11px] text-silver sm:text-xs">Tự thay ảnh sản phẩm thật, nhập giá &amp; xuất lên Vercel</p>
           </div>
         </div>
-        <button id="close-admin-btn" type="button" aria-label="Đóng quản lý" class="flex h-9 w-9 items-center justify-center rounded-xl text-silver transition hover:bg-white/10 hover:text-white">
-          <i data-lucide="x" class="h-5 w-5"></i>
-        </button>
+        <div class="flex items-center gap-2">
+          <button id="admin-quick-publish-btn" type="button" class="btn-shine hidden min-h-[38px] items-center gap-1.5 rounded-xl bg-emerald-500 px-3 py-1.5 text-xs font-bold text-white shadow transition active:scale-95 hover:bg-emerald-400">
+            <i data-lucide="cloud-upload" class="h-4 w-4"></i>
+            <span class="hidden sm:inline">Cập nhật thẳng lên web</span>
+            <span class="sm:hidden">Lên web</span>
+          </button>
+          <button id="close-admin-btn" type="button" aria-label="Đóng quản lý" class="flex h-9 w-9 items-center justify-center rounded-xl text-silver transition hover:bg-white/10 hover:text-white">
+            <i data-lucide="x" class="h-5 w-5"></i>
+          </button>
+        </div>
       </div>
 
       <!-- Admin PIN Gate -->
@@ -1592,9 +1599,65 @@
             </form>
           </div>
 
-          <!-- Tab 3: Vercel Deploy & Backup -->
+          <!-- Tab 4: Auto-Update GitHub/Vercel & Backup -->
           <div id="admin-panel-vercel" class="admin-panel hidden">
             <div class="mx-auto max-w-2xl space-y-4">
+              <!-- 1-Click Auto Publish via GitHub API -->
+              <div class="rounded-2xl border border-emerald-400/40 bg-gradient-to-br from-emerald-500/10 via-surface to-obsidian p-4 sm:p-5">
+                <div class="flex items-start gap-3">
+                  <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500 text-white shadow">
+                    <i data-lucide="cloud-upload" class="h-5 w-5"></i>
+                  </span>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                      <h4 class="text-sm font-extrabold text-white sm:text-base">Cập nhật thẳng lên web (1 chạm qua GitHub)</h4>
+                      <span class="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-[10px] font-bold text-emerald-300">Khuyên dùng</span>
+                    </div>
+                    <p class="mt-1 text-xs leading-relaxed text-silver">
+                      Dán mã khóa <strong class="text-white">GitHub Token</strong> 1 lần duy nhất (chỉ lưu riêng trên thiết bị này, không lộ ra ngoài). Sau đó mỗi lần sửa ảnh bảng giá, khuyến mãi hay giá dịch vụ, bạn chỉ cần bấm 1 nút là Vercel tự cập nhật sau 10–15 giây.
+                    </p>
+
+                    <form id="github-sync-form" class="mt-4 space-y-3">
+                      <div class="grid gap-2.5 sm:grid-cols-3">
+                        <div>
+                          <label for="gh-owner-input" class="block text-[11px] font-semibold text-white/85">Tài khoản GitHub</label>
+                          <input id="gh-owner-input" type="text" value="Yanghii" class="mt-1 w-full rounded-xl border border-white/15 bg-obsidian px-3 py-2 text-base text-white outline-none focus:border-emerald-400 sm:text-xs" />
+                        </div>
+                        <div>
+                          <label for="gh-repo-input" class="block text-[11px] font-semibold text-white/85">Tên kho (Repository)</label>
+                          <input id="gh-repo-input" type="text" value="anhmautruonggiang" class="mt-1 w-full rounded-xl border border-white/15 bg-obsidian px-3 py-2 text-base text-white outline-none focus:border-emerald-400 sm:text-xs" />
+                        </div>
+                        <div>
+                          <label for="gh-branch-input" class="block text-[11px] font-semibold text-white/85">Nhánh (Branch)</label>
+                          <input id="gh-branch-input" type="text" value="main" class="mt-1 w-full rounded-xl border border-white/15 bg-obsidian px-3 py-2 text-base text-white outline-none focus:border-emerald-400 sm:text-xs" />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label for="gh-token-input" class="block text-[11px] font-semibold text-white/85">Mã khóa GitHub (Fine-grained Token — quyền Contents: Read &amp; write)</label>
+                        <input id="gh-token-input" type="password" placeholder="github_pat_... hoặc ghp_..." autocomplete="off" class="mt-1 w-full rounded-xl border border-white/15 bg-obsidian px-3 py-2.5 text-base text-white placeholder-silver/50 outline-none focus:border-emerald-400 sm:text-xs" />
+                      </div>
+
+                      <div class="flex flex-wrap items-center gap-2 pt-1">
+                        <button id="gh-publish-now-btn" type="button" class="btn-shine inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-2.5 text-xs font-bold text-white shadow transition active:scale-95 hover:bg-emerald-400 sm:flex-none sm:text-sm">
+                          <i data-lucide="cloud-upload" class="h-4 w-4"></i>
+                          <span>Cập nhật thẳng lên web ngay</span>
+                        </button>
+                        <button type="submit" class="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl border border-white/15 bg-white/5 px-3.5 py-2 text-xs font-semibold text-white transition hover:border-emerald-400 hover:text-emerald-300">
+                          <i data-lucide="save" class="h-3.5 w-3.5"></i>
+                          <span>Lưu cấu hình</span>
+                        </button>
+                        <button id="gh-clear-token-btn" type="button" class="inline-flex min-h-[44px] items-center justify-center rounded-xl px-3 py-2 text-xs font-semibold text-red-400 transition hover:bg-red-500/15">
+                          Xóa mã khóa
+                        </button>
+                      </div>
+
+                      <div id="gh-sync-status" class="hidden rounded-xl border px-3.5 py-2.5 text-xs leading-relaxed"></div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
               <div class="rounded-2xl border border-champagne/30 bg-surface p-4 sm:p-5">
                 <div class="flex items-start gap-3">
                   <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-champagne text-obsidian">
@@ -1936,11 +1999,183 @@
       return clone(DEFAULT_DATA);
     }
 
+    const GH_CFG_KEY = 'anh_mau_truong_giang_gh_cfg_v1';
+
+    function loadGithubConfig() {
+      try {
+        const raw = localStorage.getItem(GH_CFG_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') {
+            return {
+              owner: parsed.owner || 'Yanghii',
+              repo: parsed.repo || 'anhmautruonggiang',
+              branch: parsed.branch || 'main',
+              token: parsed.token || '',
+            };
+          }
+        }
+      } catch (e) {}
+      return { owner: 'Yanghii', repo: 'anhmautruonggiang', branch: 'main', token: '' };
+    }
+
+    function saveGithubConfig(cfg) {
+      try {
+        localStorage.setItem(GH_CFG_KEY, JSON.stringify(cfg));
+      } catch (e) {}
+    }
+
+    function utf8ToBase64(str) {
+      const bytes = new TextEncoder().encode(str);
+      let binary = '';
+      const chunk = 0x8000;
+      for (let i = 0; i < bytes.length; i += chunk) {
+        binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+      }
+      return btoa(binary);
+    }
+
+    function setGhStatus(msg, tone = 'info') {
+      const box = document.getElementById('gh-sync-status');
+      if (!box) return;
+      box.classList.remove(
+        'hidden',
+        'border-emerald-400/40', 'bg-emerald-500/15', 'text-emerald-200',
+        'border-red-400/40', 'bg-red-500/15', 'text-red-200',
+        'border-champagne/40', 'bg-champagne/10', 'text-champagne'
+      );
+      if (tone === 'success') {
+        box.classList.add('border-emerald-400/40', 'bg-emerald-500/15', 'text-emerald-200');
+      } else if (tone === 'error') {
+        box.classList.add('border-red-400/40', 'bg-red-500/15', 'text-red-200');
+      } else {
+        box.classList.add('border-champagne/40', 'bg-champagne/10', 'text-champagne');
+      }
+      box.textContent = msg;
+    }
+
+    function populateGithubForm() {
+      const cfg = loadGithubConfig();
+      const o = document.getElementById('gh-owner-input');
+      const r = document.getElementById('gh-repo-input');
+      const b = document.getElementById('gh-branch-input');
+      const t = document.getElementById('gh-token-input');
+      if (o) o.value = cfg.owner;
+      if (r) r.value = cfg.repo;
+      if (b) b.value = cfg.branch;
+      if (t) t.value = cfg.token;
+    }
+
+    async function publishDataToGithub() {
+      const owner = (document.getElementById('gh-owner-input')?.value || '').trim() || 'Yanghii';
+      const repo = (document.getElementById('gh-repo-input')?.value || '').trim() || 'anhmautruonggiang';
+      const branch = (document.getElementById('gh-branch-input')?.value || '').trim() || 'main';
+      const token = (document.getElementById('gh-token-input')?.value || '').trim() || loadGithubConfig().token;
+
+      if (!token) {
+        switchAdminTab('vercel');
+        setGhStatus('Bạn chưa dán mã khóa GitHub Token. Hãy dán mã khóa vào ô bên trên rồi bấm cập nhật nhé!', 'error');
+        showToast('Hãy dán GitHub Token ở tab 4 trước khi cập nhật.');
+        const t = document.getElementById('gh-token-input');
+        if (t) t.focus();
+        return;
+      }
+
+      saveGithubConfig({ owner, repo, branch, token });
+      const publishBtn = document.getElementById('gh-publish-now-btn');
+      const quickBtn = document.getElementById('admin-quick-publish-btn');
+      if (publishBtn) publishBtn.disabled = true;
+      if (quickBtn) quickBtn.disabled = true;
+
+      setGhStatus('Đang đẩy dữ liệu mới lên GitHub...', 'info');
+      showToast('Đang cập nhật thẳng lên web...');
+
+      try {
+        const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data.json`;
+        const headers = {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json',
+        };
+
+        let existingSha = null;
+        const getRes = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers });
+        if (getRes.ok) {
+          const info = await getRes.json();
+          existingSha = info.sha || null;
+        } else if (getRes.status === 401) {
+          throw new Error('Mã khóa GitHub Token không hợp lệ hoặc đã hết hạn (lỗi 401).');
+        } else if (getRes.status === 403) {
+          throw new Error('Mã khóa chưa đủ quyền ghi file. Hãy kiểm tra quyền Contents: Read and write (lỗi 403).');
+        } else if (getRes.status !== 404) {
+          throw new Error(`Không kiểm tra được kho GitHub (mã lỗi ${getRes.status}).`);
+        }
+
+        appData.updatedAt = Date.now();
+        saveData();
+        const contentB64 = utf8ToBase64(JSON.stringify(appData, null, 2));
+        const payload = {
+          message: `Cập nhật Ảnh Màu Trường Giang (${new Date().toLocaleString('vi-VN')})`,
+          content: contentB64,
+          branch,
+        };
+        if (existingSha) payload.sha = existingSha;
+
+        const putRes = await fetch(apiUrl, {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify(payload),
+        });
+
+        if (!putRes.ok) {
+          let detail = '';
+          try {
+            const errJson = await putRes.json();
+            detail = errJson.message ? ` (${errJson.message})` : '';
+          } catch (e) {}
+          throw new Error(`GitHub từ chối cập nhật (mã ${putRes.status})${detail}. Kiểm tra lại quyền Contents: Read & write của Token.`);
+        }
+
+        setGhStatus('Cập nhật thành công lên GitHub! Vercel sẽ tự làm mới trang web chính thức sau khoảng 10–15 giây.', 'success');
+        showToast('Đã cập nhật thẳng lên web thành công!');
+      } catch (err) {
+        const msg = (err && err.message) ? err.message : 'Không kết nối được GitHub. Hãy kiểm tra mạng và thử lại.';
+        setGhStatus(msg, 'error');
+        showToast('Cập nhật chưa thành công — xem chi tiết ở tab 4.');
+      } finally {
+        if (publishBtn) publishBtn.disabled = false;
+        if (quickBtn) quickBtn.disabled = false;
+      }
+    }
+
+    async function syncLivePublishedData() {
+      if (window.location.protocol !== 'https:') return;
+      try {
+        const liveUrl = new URL('data.json', window.location.href);
+        liveUrl.searchParams.set('t', String(Date.now()));
+        const res = await fetch(liveUrl.toString(), { cache: 'no-store' });
+        if (!res.ok) return;
+        const remote = await res.json();
+        if (remote && remote.store && Array.isArray(remote.services)) {
+          const remoteTs = Number(remote.updatedAt || 0);
+          const localTs = Number(appData.updatedAt || 0);
+          if (!localTs || remoteTs >= localTs) {
+            appData = normalizeAppData(remote);
+            selectedServiceId = appData.services[0] ? appData.services[0].id : null;
+            selectedPromoId = appData.promotions[0] ? appData.promotions[0].id : null;
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch (e) {}
+            renderAll();
+          }
+        }
+      } catch (e) {}
+    }
+
     function saveData() {
+      appData.updatedAt = Date.now();
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
       } catch (e) {
-        showToast('Bộ nhớ trình duyệt gần đầy, hãy tải file index.html hoặc xóa bớt ảnh lớn.');
+        showToast('Bộ nhớ trình duyệt gần đầy, hãy bấm Cập nhật thẳng lên web hoặc xóa bớt ảnh lớn.');
       }
     }
 
@@ -3354,10 +3589,16 @@
       modal.classList.remove('hidden');
       modal.classList.add('flex');
       document.getElementById('admin-pin-error').classList.add('hidden');
+      const quickPub = document.getElementById('admin-quick-publish-btn');
+      if (quickPub) {
+        quickPub.classList.toggle('hidden', !adminUnlocked);
+        quickPub.classList.toggle('inline-flex', adminUnlocked);
+      }
       if (adminUnlocked) {
         document.getElementById('admin-pin-gate').classList.add('hidden');
         document.getElementById('admin-workspace').classList.remove('hidden');
         document.getElementById('admin-workspace').classList.add('flex');
+        populateGithubForm();
         switchAdminTab(initialTab);
         renderAdminPriceSheets();
         renderAdminPromoList();
@@ -3518,6 +3759,10 @@
       if (qPriceBtn) { qPriceBtn.classList.add('hidden'); qPriceBtn.classList.remove('inline-flex'); }
       const qPromoBtn = docClone.querySelector('#quick-manage-promo-btn');
       if (qPromoBtn) { qPromoBtn.classList.add('hidden'); qPromoBtn.classList.remove('inline-flex'); }
+      const qPubClone = docClone.querySelector('#admin-quick-publish-btn');
+      if (qPubClone) { qPubClone.classList.add('hidden'); qPubClone.classList.remove('inline-flex'); }
+      const ghTokClone = docClone.querySelector('#gh-token-input');
+      if (ghTokClone) { ghTokClone.value = ''; ghTokClone.removeAttribute('value'); }
       const bookingModal = docClone.querySelector('#booking-modal');
       if (bookingModal) { bookingModal.classList.add('hidden'); bookingModal.classList.remove('flex'); }
       const lightboxModal = docClone.querySelector('#lightbox-modal');
@@ -3540,6 +3785,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       renderAll();
+      syncLivePublishedData();
       initScrollReveal();
       initThreeHero();
 
@@ -3787,6 +4033,9 @@
         const entered = document.getElementById('admin-pin-input').value.trim();
         if (entered === (appData.pin || '1234')) {
           adminUnlocked = true;
+          populateGithubForm();
+          const quickPub = document.getElementById('admin-quick-publish-btn');
+          if (quickPub) { quickPub.classList.remove('hidden'); quickPub.classList.add('inline-flex'); }
           syncAdminHeaderVisibility();
           document.getElementById('admin-pin-gate').classList.add('hidden');
           document.getElementById('admin-workspace').classList.remove('hidden');
@@ -4202,6 +4451,40 @@
         document.body.removeChild(a);
         showToast('Đã tải ảnh tấm QR nét cao (1200×1600px) sẵn sàng in tại tiệm!');
       });
+
+      // GitHub 1-Click Auto-Publish listeners
+      const quickPubBtn = document.getElementById('admin-quick-publish-btn');
+      if (quickPubBtn) quickPubBtn.addEventListener('click', publishDataToGithub);
+
+      const ghPubBtn = document.getElementById('gh-publish-now-btn');
+      if (ghPubBtn) ghPubBtn.addEventListener('click', publishDataToGithub);
+
+      const ghForm = document.getElementById('github-sync-form');
+      if (ghForm) {
+        ghForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          saveGithubConfig({
+            owner: document.getElementById('gh-owner-input').value.trim() || 'Yanghii',
+            repo: document.getElementById('gh-repo-input').value.trim() || 'anhmautruonggiang',
+            branch: document.getElementById('gh-branch-input').value.trim() || 'main',
+            token: document.getElementById('gh-token-input').value.trim(),
+          });
+          setGhStatus('Đã lưu cấu hình GitHub trên thiết bị này. Giờ bạn có thể bấm "Cập nhật thẳng lên web ngay" bất cứ lúc nào!', 'success');
+          showToast('Đã lưu cấu hình GitHub!');
+        });
+      }
+
+      const ghClearBtn = document.getElementById('gh-clear-token-btn');
+      if (ghClearBtn) {
+        ghClearBtn.addEventListener('click', () => {
+          const cfg = loadGithubConfig();
+          cfg.token = '';
+          saveGithubConfig(cfg);
+          document.getElementById('gh-token-input').value = '';
+          setGhStatus('Đã xóa mã khóa GitHub khỏi trình duyệt này.', 'info');
+          showToast('Đã xóa mã khóa GitHub.');
+        });
+      }
 
       document.getElementById('reset-data-btn').addEventListener('click', (e) => {
         if (!resetArmed) {

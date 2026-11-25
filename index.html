@@ -3786,6 +3786,13 @@
     document.addEventListener('DOMContentLoaded', () => {
       renderAll();
       syncLivePublishedData();
+      if (window.location.protocol === 'https:' && !window.location.hostname.includes('localhost')) {
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        const vaScript = document.createElement('script');
+        vaScript.defer = true;
+        vaScript.src = '/_vercel/insights/script.js';
+        document.head.appendChild(vaScript);
+      }
       initScrollReveal();
       initThreeHero();
 

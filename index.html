@@ -41,6 +41,16 @@
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <script>
+    /* GIAO DIỆN MỚI: bảng màu của tiệm — đổi mã màu ở đây là đổi cả trang */
+    const MAU_TIEM = {
+      nenToi: '#060608',      // nền chính (đen sâu)
+      nenVua: '#0F0F13',      // nền các khối xen kẽ
+      nenThe: '#16161C',      // nền thẻ, ô nhập
+      vang: '#E5B97A',        // màu chính: vàng champagne theo logo TG
+      vangDam: '#C28D49',     // vàng đậm cho nút chuyển màu
+      chuPhu: '#A6A6B2',      // chữ phụ (mô tả, ghi chú) — sáng hơn một chút cho dễ đọc
+      zalo: '#0068FF',        // màu nút Zalo
+    };
     tailwind.config = {
       theme: {
         extend: {
@@ -49,13 +59,13 @@
             serif: ['"Playfair Display"', 'Georgia', 'serif'],
           },
           colors: {
-            obsidian: '#060608',
-            carbon: '#0F0F13',
-            surface: '#16161C',
-            champagne: '#E5B97A',
-            champagneDark: '#C28D49',
-            silver: '#9A9AA6',
-            zalo: '#0068FF',
+            obsidian: MAU_TIEM.nenToi,
+            carbon: MAU_TIEM.nenVua,
+            surface: MAU_TIEM.nenThe,
+            champagne: MAU_TIEM.vang,
+            champagneDark: MAU_TIEM.vangDam,
+            silver: MAU_TIEM.chuPhu,
+            zalo: MAU_TIEM.zalo,
           },
           boxShadow: {
             spatial: '0 30px 70px -25px rgba(0, 0, 0, 0.75)',
@@ -201,6 +211,23 @@
 
     .card-enter { animation: fadeUp 0.44s cubic-bezier(0.22, 1, 0.36, 1) both; }
     .modal-panel-anim { animation: modalPop 0.26s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+    /* GIAO DIỆN MỚI: trên điện thoại, chữ nhỏ (ghi chú, nhãn) to hơn để dễ đọc */
+    @media (max-width: 640px) {
+      .text-\[10px\] { font-size: 11.5px; }
+      .text-\[11px\] { font-size: 12.5px; }
+      .text-xs { font-size: 13.5px; line-height: 1.5; }
+    }
+
+    /* GIAO DIỆN MỚI: mô tả dịch vụ gọn 3 dòng trên điện thoại */
+    @media (max-width: 640px) {
+      .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
 
     @media (prefers-reduced-motion: reduce) {
       .anim-hero, .marquee-track, .card-enter, .modal-panel-anim {
@@ -464,6 +491,10 @@
               <tbody id="retail-price-body" class="divide-y divide-white/10"></tbody>
             </table>
           </div>
+          <button id="retail-price-more" type="button" class="mt-3 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-champagne/40 bg-champagne/10 px-4 py-2.5 text-sm font-bold text-champagne transition active:scale-[0.99] hover:bg-champagne hover:text-obsidian">
+            <i data-lucide="chevrons-down" class="h-4 w-4"></i>
+            <span>Xem đủ bảng giá</span>
+          </button>
         </div>
 
         <!-- STANDOUT SPOTLIGHT: Chụp Ảnh Thẻ 25.000đ / Bộ -->
@@ -597,7 +628,7 @@
         </div>
 
         <!-- Searchable Service Price Reference (Preserved & Integrated) -->
-        <div class="reveal mt-10 rounded-3xl border border-white/10 bg-surface/60 p-4 backdrop-blur-md sm:mt-12 sm:p-6">
+        <div class="reveal mt-10 hidden rounded-3xl border border-white/10 bg-surface/60 p-4 backdrop-blur-md sm:mt-12 sm:p-6 md:block">
           <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
             <div>
               <h3 class="text-lg font-bold text-white sm:text-xl">Tra cứu nhanh theo từng dịch vụ</h3>
@@ -750,7 +781,7 @@
           </div>
         </div>
 
-        <div id="services-grid" class="mt-9 grid gap-5 sm:mt-11 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+        <div id="services-grid" class="mt-7 grid grid-cols-2 gap-3 sm:mt-11 sm:gap-6 lg:grid-cols-3">
           <!-- Rendered by JS -->
         </div>
       </div>
@@ -2724,15 +2755,15 @@
         const delayMs = Math.min(idx * 45, 320);
 
         return `
-          <article class="tilt-card card-enter group flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-carbon/90 p-3 shadow-spatial hover:border-champagne/45" style="animation-delay: ${delayMs}ms;">
+          <article class="tilt-card card-enter group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-carbon/90 p-2 shadow-spatial hover:border-champagne/45 sm:rounded-3xl sm:p-3" style="animation-delay: ${delayMs}ms;">
             <div class="card-glare"></div>
             <div class="tilt-inner flex flex-1 flex-col">
-              <div class="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-surface via-carbon to-obsidian">
+              <div class="relative aspect-square overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-surface via-carbon to-obsidian sm:aspect-[4/3] sm:rounded-2xl">
                 ${hasPhotos ? `
                   <button type="button" data-lightbox-id="${escapeHtml(item.id)}" class="open-lightbox-btn block h-full w-full text-left">
                     <img src="${cover}" alt="${escapeHtml(item.title)}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
                   </button>
-                  <span class="pointer-events-none absolute bottom-2.5 right-2.5 inline-flex items-center gap-1 rounded-full border border-white/15 bg-obsidian/85 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-md">
+                  <span class="pointer-events-none absolute bottom-2.5 right-2.5 hidden items-center gap-1 rounded-full sm:inline-flex border border-white/15 bg-obsidian/85 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-md">
                     <i data-lucide="images" class="h-3 w-3 text-champagne"></i>
                     <span>${item.images.length} ảnh</span>
                   </span>
@@ -2744,27 +2775,27 @@
                     ${adminUnlocked ? `<button type="button" data-quick-edit="${escapeHtml(item.id)}" class="quick-edit-btn mt-3 rounded-full border border-champagne/30 bg-champagne/10 px-3 py-1.5 text-[11px] font-semibold text-champagne hover:bg-champagne hover:text-obsidian">+ Up ảnh trong Quản lý</button>` : '<p class="mt-2.5 text-xs text-silver/70">Đang cập nhật ảnh mẫu</p>'}
                   </div>
                 `}
-                <span class="pointer-events-none absolute left-2.5 top-2.5 rounded-full border border-white/15 bg-obsidian/85 px-2.5 py-1 text-[11px] font-extrabold text-champagne backdrop-blur-md">
+                <span class="pointer-events-none absolute left-2 top-2 rounded-full border border-white/15 bg-obsidian/85 px-2 py-0.5 text-[11px] font-extrabold text-champagne backdrop-blur-md sm:left-2.5 sm:top-2.5 sm:px-2.5 sm:py-1">
                   ${editionNo}
                 </span>
-                <span class="pointer-events-none absolute right-2.5 top-2.5 rounded-full border border-white/10 bg-obsidian/75 px-2.5 py-1 text-[10px] font-semibold text-white/85 backdrop-blur-md">
+                <span class="pointer-events-none absolute right-2.5 top-2.5 hidden rounded-full border border-white/10 bg-obsidian/75 px-2.5 py-1 text-[10px] sm:inline font-semibold text-white/85 backdrop-blur-md">
                   ${escapeHtml(CATEGORY_LABELS[item.category] || 'Dịch vụ')}
                 </span>
               </div>
 
-              <div class="flex flex-1 flex-col px-2 pb-2 pt-4">
-                <h3 class="text-lg font-bold tracking-tight text-white transition-colors group-hover:text-champagne">${escapeHtml(item.title)}</h3>
-                <p class="mt-1.5 flex-1 text-xs leading-relaxed text-silver sm:text-sm">${escapeHtml(item.description)}</p>
+              <div class="flex flex-1 flex-col px-1 pb-1 pt-3 sm:px-2 sm:pb-2 sm:pt-4">
+                <h3 class="text-base font-bold leading-snug tracking-tight text-white transition-colors group-hover:text-champagne sm:text-lg">${escapeHtml(item.title)}</h3>
+                <p class="line-clamp-3 mt-1 flex-1 text-xs leading-relaxed text-silver sm:mt-1.5 sm:text-sm">${escapeHtml(item.description)}</p>
 
-                <div class="mt-4 flex items-center justify-between gap-2 border-t border-white/10 pt-3.5">
+                <div class="mt-3 flex flex-col gap-2 border-t border-white/10 pt-3 sm:mt-4 sm:flex-row sm:items-center sm:justify-between sm:pt-3.5">
                   <div class="min-w-0">
-                    <span class="block truncate text-[10px] font-bold uppercase tracking-wider text-silver/80">${escapeHtml(item.unit || 'Giá tham khảo')}</span>
+                    <span class="hidden truncate text-[10px] font-bold uppercase tracking-wider text-silver/80 sm:block">${escapeHtml(item.unit || 'Giá tham khảo')}</span>
                     <span class="block truncate text-sm font-bold ${item.price ? 'text-champagne' : 'text-silver/75'}">${priceLabel}</span>
                   </div>
                   <button
                     type="button"
                     data-service="${escapeHtml(item.title)}"
-                    class="book-service-btn inline-flex min-h-[38px] shrink-0 items-center gap-1 rounded-xl border border-champagne/40 bg-champagne/10 px-3.5 py-2 text-xs font-bold text-champagne transition-all duration-200 active:scale-95 hover:bg-champagne hover:text-obsidian"
+                    class="book-service-btn inline-flex min-h-[44px] w-full shrink-0 items-center justify-center gap-1 rounded-xl sm:w-auto border border-champagne/40 bg-champagne/10 px-3.5 py-2 text-xs font-bold text-champagne transition-all duration-200 active:scale-95 hover:bg-champagne hover:text-obsidian"
                   >
                     <span>Đặt ngay</span>
                     <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
@@ -2979,6 +3010,8 @@
       return v ? Number(v).toLocaleString('vi-VN') : '';
     }
 
+    let retailTableExpanded = false;
+
     function renderRetailPriceTable() {
       const head = document.getElementById('retail-price-head');
       const body = document.getElementById('retail-price-body');
@@ -2988,7 +3021,16 @@
         <th class="sticky left-0 z-10 bg-carbon px-3 py-3 text-left">Khổ (cm)</th>
         ${rp.finishes.map((f) => `<th class="px-3 py-3">${escapeHtml(f)}</th>`).join('')}
       </tr>`;
-      body.innerHTML = rp.rows.map((r) => `<tr class="hover:bg-white/[0.04]">
+      // GIAO DIỆN MỚI: mặc định hiện 11 khổ đầu (đến 30x45) cho trang gọn
+      const SO_DONG_HIEN = 11;
+      const showAll = retailTableExpanded || rp.rows.length <= SO_DONG_HIEN;
+      const rows = showAll ? rp.rows : rp.rows.slice(0, SO_DONG_HIEN);
+      const moreBtn = document.getElementById('retail-price-more');
+      if (moreBtn) {
+        moreBtn.classList.toggle('hidden', rp.rows.length <= SO_DONG_HIEN);
+        moreBtn.querySelector('span').textContent = showAll ? 'Thu gọn bảng giá' : `Xem đủ ${rp.rows.length} khổ ảnh (đến ${rp.rows[rp.rows.length - 1].size.replace('x', '×')})`;
+      }
+      body.innerHTML = rows.map((r) => `<tr class="hover:bg-white/[0.04]">
         <td class="sticky left-0 z-10 bg-carbon px-3 py-2.5 text-left font-bold text-champagne">${escapeHtml(r.size.replace('x', '×'))}</td>
         ${rp.finishes.map((_, i) => `<td class="px-3 py-2.5 font-semibold text-white">${formatPriceCell(r.prices[i])}</td>`).join('')}
       </tr>`).join('');
@@ -4471,6 +4513,13 @@
         saveData();
         renderAll();
         showToast('Đã gỡ ảnh banner khuyến mãi.');
+      });
+
+      // GIAO DIỆN MỚI: mở / thu gọn bảng giá chữ
+      document.getElementById('retail-price-more').addEventListener('click', () => {
+        retailTableExpanded = !retailTableExpanded;
+        renderRetailPriceTable();
+        if (!retailTableExpanded) document.getElementById('retail-price-block').scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
 
       // Quick Price Estimator listeners

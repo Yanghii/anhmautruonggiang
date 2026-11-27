@@ -384,8 +384,8 @@
                 <p class="mt-0.5 text-[11px] text-silver sm:text-xs">Gửi ảnh giữ nét gốc</p>
               </div>
               <div>
-                <p class="text-lg font-extrabold tracking-tight text-champagne sm:text-2xl">25.000đ/bộ</p>
-                <p class="mt-0.5 text-[11px] text-silver sm:text-xs">Chỉnh sửa chỉn chu</p>
+                <p class="text-lg font-extrabold tracking-tight text-champagne sm:text-2xl">25.000đ</p>
+                <p class="mt-0.5 text-[11px] text-silver sm:text-xs">Ảnh thẻ / bộ, lấy liền</p>
               </div>
               <div>
                 <p class="text-lg font-extrabold tracking-tight text-white sm:text-2xl">Tự nhiên</p>
@@ -585,6 +585,15 @@
                   <button type="button" data-calc-type="khung_hinh" class="calc-type-btn rounded-xl border border-white/15 bg-obsidian px-3.5 py-2 text-xs font-semibold text-white transition hover:border-champagne">Trọn bộ Hình + Khung</button>
                   <button type="button" data-calc-type="ep_go" class="calc-type-btn rounded-xl border border-white/15 bg-obsidian px-3.5 py-2 text-xs font-semibold text-white transition hover:border-champagne">Ép ảnh gỗ</button>
                   <button type="button" data-calc-type="anh_the" class="calc-type-btn rounded-xl border border-white/15 bg-obsidian px-3.5 py-2 text-xs font-semibold text-white transition hover:border-champagne">Chụp ảnh thẻ (25.000đ/bộ)</button>
+                </div>
+                <div id="calc-frame-wrap" class="mt-3 hidden">
+                  <p class="text-xs font-bold uppercase tracking-wider text-silver">Chọn loại khung</p>
+                  <div id="calc-frame-pills" class="mt-2 flex flex-wrap gap-2">
+                    <button type="button" data-calc-frame="Bọc viền" class="calc-frame-btn rounded-xl border px-3 py-1.5 text-xs transition hover:border-champagne">Bọc viền</button>
+                    <button type="button" data-calc-frame="Tráng gương bọc viền" class="calc-frame-btn rounded-xl border px-3 py-1.5 text-xs transition hover:border-champagne">Tráng gương bọc viền</button>
+                    <button type="button" data-calc-frame="Tráng gương gọng HD" class="calc-frame-btn rounded-xl border px-3 py-1.5 text-xs transition hover:border-champagne">Tráng gương gọng HD</button>
+                    <button type="button" data-calc-frame="Tráng gương gọng Titan" class="calc-frame-btn rounded-xl border px-3 py-1.5 text-xs transition hover:border-champagne">Tráng gương gọng Titan</button>
+                  </div>
                 </div>
               </div>
 
@@ -1075,7 +1084,7 @@
         <a href="#gui-anh" class="transition hover:text-white">Gửi ảnh HD</a>
         <a href="#bang-gia" class="transition hover:text-white">Bảng giá</a>
         <a href="#lien-he" class="transition hover:text-white">Bản đồ</a>
-        <button id="footer-admin-trigger" type="button" class="text-silver/45 transition hover:text-champagne">Quản trị</button>
+        <button id="footer-admin-trigger" type="button" class="hidden text-silver/45 transition hover:text-champagne">Quản trị</button>
       </div>
     </div>
   </footer>
@@ -1879,7 +1888,7 @@
         siteUrl: 'https://anhmautruonggiang.vercel.app',
         location: 'Phước Hải',
         slogan: 'In một tấm hình, lưu nghìn kỷ niệm',
-        address: 'Phước Hải, Bà Rịa - Vũng Tàu',
+        address: 'Phước Hải, Bà Rịa - Vũng Tàu (gần Quầy thuốc tây Yến Vy 1)',
         hours: 'Mở cửa mỗi ngày (nhắn Zalo để đặt nhanh)',
         zalo: '0888191504',
         gmail: 'gtran1206@gmail.com',
@@ -1892,7 +1901,7 @@
           id: 'in-anh',
           category: 'photo',
           title: 'In ảnh',
-          price: '',
+          price: 'Từ 1.000đ/tấm',
           unit: 'Theo khổ ảnh',
           description: 'In ảnh các khổ sắc nét, giấy ảnh bền màu, phù hợp lưu giữ ảnh gia đình, kỷ niệm và du lịch.',
           icon: 'image',
@@ -2015,7 +2024,7 @@
 
     // Bảng giá khách lẻ (đồng / tấm), lấy theo bảng giá khách lẻ trong app quản lý. null = không làm / báo giá riêng.
     const DEFAULT_RETAIL_PRICES = {
-      finishes: ['In', 'Ép plastic', 'Ép gỗ', 'Bọc viền', 'Tráng gương BV', 'Tráng gương gọng HD', 'Tráng gương gọng Titan'],
+      finishes: ['In', 'Ép plastic', 'Ép gỗ', 'Bọc viền', 'Tráng gương bọc viền', 'Tráng gương gọng HD', 'Tráng gương gọng Titan'],
       rows: [
         { size: '6x9', prices: [1000, 2000, null, null, null, null, null] },
         { size: '7x10', prices: [1500, 2500, null, null, null, null, null] },
@@ -2058,6 +2067,8 @@
       if (!parsed.retailPrices || !Array.isArray(parsed.retailPrices.rows) || !Array.isArray(parsed.retailPrices.finishes)) {
         parsed.retailPrices = clone(DEFAULT_RETAIL_PRICES);
       }
+      // "BV" nghĩa là "bọc viền" — đổi tên cột cho khách dễ hiểu (kể cả dữ liệu cũ đã lưu)
+      parsed.retailPrices.finishes = parsed.retailPrices.finishes.map((f) => (f === 'Tráng gương BV' ? 'Tráng gương bọc viền' : f));
       if (!parsed.priceShowcase || typeof parsed.priceShowcase !== 'object') {
         parsed.priceShowcase = clone(DEFAULT_DATA.priceShowcase);
       }
@@ -3040,7 +3051,7 @@
     const RETAIL_FINISH_FOR_CALC = { in_le: 'In', ep_go: 'Ép gỗ' };
 
     function retailPriceFor(type, size) {
-      const finish = RETAIL_FINISH_FOR_CALC[type];
+      const finish = type === 'khung_hinh' ? calcState.frame : RETAIL_FINISH_FOR_CALC[type];
       const rp = appData.retailPrices;
       if (!finish || !rp) return null;
       const col = rp.finishes.indexOf(finish);
@@ -3265,7 +3276,11 @@
         : 'Chưa có';
     }
 
-    let calcState = { type: 'in_le', size: '10x15', qty: 1 };
+    let calcState = { type: 'in_le', size: '10x15', qty: 1, frame: 'Bọc viền' };
+
+    // Khuyến mãi: in đủ 100 tấm khổ 6x9 chỉ 90.000đ (giá thường 1.000đ/tấm).
+    // Muốn đổi/tắt khuyến mãi thì sửa 3 con số ở đây (comboPrice: 0 là tắt).
+    const PROMO_COMBO = { type: 'in_le', size: '6x9', comboQty: 100, comboPrice: 90000 };
     let activeBaTab = 'idphoto';
 
     const CALC_TYPE_LABELS = {
@@ -3315,6 +3330,10 @@
       return Number(num || 0).toLocaleString('vi-VN') + 'đ';
     }
 
+    function calcTypeLabel() {
+      return calcState.type === 'khung_hinh' ? `Hình + Khung (${calcState.frame})` : CALC_TYPE_LABELS[calcState.type];
+    }
+
     function renderCalculator() {
       const typeBtns = document.querySelectorAll('.calc-type-btn');
       typeBtns.forEach((btn) => {
@@ -3346,6 +3365,18 @@
           ? fromRetail
           : Number((prices[calcState.type] && prices[calcState.type][calcState.size]) || 0);
 
+      const frameWrap = document.getElementById('calc-frame-wrap');
+      if (frameWrap) frameWrap.classList.toggle('hidden', calcState.type !== 'khung_hinh');
+      document.querySelectorAll('.calc-frame-btn').forEach((btn) => {
+        const active = btn.getAttribute('data-calc-frame') === calcState.frame;
+        btn.classList.toggle('border-champagne', active);
+        btn.classList.toggle('text-champagne', active);
+        btn.classList.toggle('font-bold', active);
+        btn.classList.toggle('border-white/15', !active);
+        btn.classList.toggle('text-white', !active);
+        btn.classList.toggle('font-semibold', !active);
+      });
+
       const summaryEl = document.getElementById('calc-summary-label');
       const totalEl = document.getElementById('calc-total-display');
       const hintEl = document.getElementById('calc-unit-hint');
@@ -3353,12 +3384,21 @@
       const sizeText = calcState.type === 'anh_the' ? '1 bộ lấy liền' : `Khổ ${CALC_SIZE_LABELS[calcState.size] || calcState.size.replace('x', '×') + ' cm'}`;
       const unitWord = calcState.type === 'anh_the' ? 'bộ' : 'tấm';
       if (summaryEl) {
-        summaryEl.textContent = `${CALC_TYPE_LABELS[calcState.type]} • ${sizeText} × ${calcState.qty} ${unitWord}`;
+        summaryEl.textContent = `${calcTypeLabel()} • ${sizeText} × ${calcState.qty} ${unitWord}`;
       }
-      if (unitPrice > 0) {
+      const promoOn = PROMO_COMBO.comboPrice > 0 && calcState.type === PROMO_COMBO.type && calcState.size === PROMO_COMBO.size;
+      if (unitPrice > 0 && promoOn && calcState.qty >= PROMO_COMBO.comboQty) {
+        const combos = Math.floor(calcState.qty / PROMO_COMBO.comboQty);
+        const rest = calcState.qty - combos * PROMO_COMBO.comboQty;
+        const total = combos * PROMO_COMBO.comboPrice + rest * unitPrice;
+        if (totalEl) totalEl.textContent = formatVnd(total);
+        if (hintEl) hintEl.textContent = `Đã áp dụng khuyến mãi: ${PROMO_COMBO.comboQty} tấm ${PROMO_COMBO.size.replace('x', '×')} chỉ ${formatVnd(PROMO_COMBO.comboPrice)}` + (rest ? ` (+ ${rest} tấm lẻ × ${formatVnd(unitPrice)}).` : '.');
+      } else if (unitPrice > 0) {
         const total = unitPrice * calcState.qty;
         if (totalEl) totalEl.textContent = formatVnd(total);
-        if (hintEl) hintEl.textContent = `Đơn giá tham khảo: ${formatVnd(unitPrice)} / ${unitWord} (nhắn Zalo nếu in số lượng nhiều để nhận giá tốt hơn).`;
+        if (hintEl) hintEl.textContent = promoOn
+          ? `Đơn giá: ${formatVnd(unitPrice)} / tấm. Khuyến mãi: in đủ ${PROMO_COMBO.comboQty} tấm chỉ ${formatVnd(PROMO_COMBO.comboPrice)}!`
+          : `Đơn giá tham khảo: ${formatVnd(unitPrice)} / ${unitWord} (nhắn Zalo nếu in số lượng nhiều để nhận giá tốt hơn).`;
       } else {
         if (totalEl) totalEl.textContent = 'Báo giá qua Zalo';
         if (hintEl) hintEl.textContent = 'Bấm nút bên dưới để gửi đúng khổ ảnh & số lượng qua Zalo — tiệm báo giá ngay.';
@@ -3638,7 +3678,7 @@
 
       ctx.fillStyle = '#9CA3AF';
       ctx.font = `500 ${14 * scale}px "Plus Jakarta Sans", sans-serif`;
-      ctx.fillText(s.address || 'Phước Hải, Bà Rịa - Vũng Tàu', w / 2, 712 * scale);
+      ctx.fillText(s.address || 'Phước Hải, Bà Rịa - Vũng Tàu', w / 2, 712 * scale, w * 0.9);
       ctx.fillStyle = '#E5B97A';
       ctx.font = `600 ${13 * scale}px "Plus Jakarta Sans", sans-serif`;
       ctx.fillText((urlText || '').replace(/^https?:\/\//, ''), w / 2, 744 * scale);
@@ -4529,6 +4569,12 @@
           renderCalculator();
         });
       });
+      document.querySelectorAll('.calc-frame-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          calcState.frame = btn.getAttribute('data-calc-frame');
+          renderCalculator();
+        });
+      });
       const calcSizeEl = document.getElementById('calc-size-select');
       if (calcSizeEl) {
         calcSizeEl.addEventListener('change', (e) => {
@@ -4558,13 +4604,13 @@
           ep_go: 'Ép ảnh gỗ',
           anh_the: 'Chụp ảnh thẻ',
         };
-        const sizeText = calcState.type === 'anh_the' ? '1 bộ lấy liền' : CALC_SIZE_LABELS[calcState.size];
+        const sizeText = calcState.type === 'anh_the' ? '1 bộ lấy liền' : (CALC_SIZE_LABELS[calcState.size] || calcState.size.replace('x', '×') + ' cm');
         const unitWord = calcState.type === 'anh_the' ? 'bộ' : 'tấm';
         const totalText = document.getElementById('calc-total-display').textContent;
         openBookingModalWithDetails(
           svcMap[calcState.type] || 'In ảnh',
           `${sizeText} — SL: ${calcState.qty} ${unitWord}`,
-          `Ước tính nhanh (${CALC_TYPE_LABELS[calcState.type]}): ${totalText}`
+          `Ước tính nhanh (${calcTypeLabel()}): ${totalText}`
         );
       });
 

@@ -26,7 +26,10 @@
         "addressRegion": "Bà Rịa - Vũng Tàu",
         "addressCountry": "VN"
       },
-      "priceRange": "25.000đ+"
+      "priceRange": "1.000đ - 700.000đ",
+      "url": "https://anhmautruonggiang.vercel.app",
+      "openingHours": "Mo-Sa 06:00-18:00",
+      "geo": { "@type": "GeoCoordinates", "latitude": 10.4489757, "longitude": 107.2824035 }
     }
   </script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23F3D39C'/%3E%3Cstop offset='100%25' stop-color='%23B87E38'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%230A0A0D'/%3E%3Crect x='3' y='3' width='58' height='58' rx='13' fill='none' stroke='url(%23g)' stroke-width='2.5'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='800' font-size='28' letter-spacing='-1' fill='url(%23g)'%3ETG%3C/text%3E%3C/svg%3E" />
@@ -355,7 +358,7 @@
               </div>
               <div>
                 <p class="text-lg font-extrabold tracking-tight text-champagne sm:text-2xl">25.000đ/bộ</p>
-                <p class="mt-0.5 text-[11px] text-silver sm:text-xs">Ảnh thẻ chỉnh chỉn chu</p>
+                <p class="mt-0.5 text-[11px] text-silver sm:text-xs">Chỉnh sửa chỉn chu</p>
               </div>
               <div>
                 <p class="text-lg font-extrabold tracking-tight text-white sm:text-2xl">Tự nhiên</p>
@@ -442,6 +445,27 @@
           <!-- Rendered by JS -->
         </div>
 
+        <!-- Bảng giá khách lẻ dạng chữ: dễ đọc trên điện thoại, Google đọc được -->
+        <div id="retail-price-block" class="reveal mt-8 rounded-3xl border border-champagne/30 bg-surface/85 p-4 shadow-spatial sm:mt-10 sm:p-6">
+          <div class="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
+            <div>
+              <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-champagne">
+                <i data-lucide="table" class="h-3.5 w-3.5"></i>
+                <span>Giá khách lẻ (đồng / tấm)</span>
+              </span>
+              <h3 class="mt-1 text-lg font-extrabold text-white sm:text-xl">Bảng giá in ảnh dạng chữ</h3>
+              <p class="mt-1 text-xs text-silver">Vuốt ngang để xem đủ các cột. Ô trống: nhắn Zalo để tiệm báo giá.</p>
+            </div>
+            <p class="text-xs font-semibold text-champagne">Đại lý in xin liên hệ để được giá tốt nhất</p>
+          </div>
+          <div class="no-scrollbar mt-4 overflow-x-auto rounded-2xl border border-white/10">
+            <table class="w-full min-w-[640px] text-right text-sm">
+              <thead id="retail-price-head" class="bg-white/[0.04] text-[11px] font-bold uppercase tracking-wide text-silver"></thead>
+              <tbody id="retail-price-body" class="divide-y divide-white/10"></tbody>
+            </table>
+          </div>
+        </div>
+
         <!-- STANDOUT SPOTLIGHT: Chụp Ảnh Thẻ 25.000đ / Bộ -->
         <div id="anh-the-noi-bat" class="reveal mt-8 overflow-hidden rounded-3xl border border-champagne/45 bg-gradient-to-br from-[#1C1812] via-surface to-obsidian p-5 shadow-goldGlow sm:mt-10 sm:p-7">
           <div class="grid items-center gap-6 lg:grid-cols-12">
@@ -476,7 +500,7 @@
               </div>
 
               <p class="mt-3 text-sm leading-relaxed text-silver sm:text-[15px]">
-                Chụp ánh sáng studio đều đẹp, <strong class="text-white">chỉnh sửa ảnh chuyên nghiệp, chỉn chu</strong> từng chi tiết: làm mịn da tự nhiên không giả, cân sáng hài hòa, chỉnh tóc và trang phục gọn gàng — đúng chuẩn hồ sơ xin việc, CCCD, bằng lái, hộ chiếu và visa.
+                Chụp dưới ánh sáng studio đều và đẹp, <strong class="text-white">chỉnh sửa ảnh chuyên nghiệp, chỉn chu</strong> từng chi tiết: làm mịn da tự nhiên không giả, cân sáng hài hòa, chỉnh tóc và trang phục gọn gàng — đúng chuẩn hồ sơ xin việc, CCCD, bằng lái, hộ chiếu và visa.
               </p>
 
               <div class="mt-4 flex flex-wrap gap-2 text-xs font-semibold text-white/90">
@@ -559,7 +583,7 @@
 
             <div class="flex flex-col justify-between rounded-2xl border border-champagne/30 bg-obsidian/85 p-4 sm:p-5 lg:col-span-5">
               <div>
-                <p class="text-[11px] font-bold uppercase tracking-wider text-silver">Tạm tính dự kiến</p>
+                <p class="text-[11px] font-bold uppercase tracking-wider text-silver">Tạm tính</p>
                 <p id="calc-summary-label" class="mt-1 text-xs font-semibold text-white/90">In ảnh lẻ • Khổ 10×15 cm × 1</p>
                 <p id="calc-total-display" class="mt-2 text-2xl font-extrabold text-champagne sm:text-3xl">Báo giá qua Zalo</p>
                 <p id="calc-unit-hint" class="mt-1 text-[11px] text-silver">Nhắn Zalo số lượng để tiệm báo mức giá ưu đãi nhất.</p>
@@ -920,7 +944,7 @@
                 <iframe
                   id="gmaps-iframe"
                   title="Bản đồ Ảnh Màu Trường Giang Phước Hải"
-                  src="https://maps.google.com/maps?q=Ph%C6%B0%E1%BB%9Bc+H%E1%BA%A3i,+%C4%90%E1%BA%A5t+%C4%90%E1%BB%8F,+B%C3%A0+R%E1%BB%8Ba+-+V%C5%A9ng+T%C3%A0u&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                  src="https://maps.google.com/maps?q=10.4489757,107.2824035&t=&z=17&ie=UTF8&iwloc=&output=embed"
                   class="h-full w-full border-0 opacity-90"
                   loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"
@@ -1371,6 +1395,24 @@
               </form>
             </div>
 
+            <!-- Bảng giá khách lẻ dạng chữ -->
+            <div class="rounded-2xl border border-champagne/30 bg-surface p-4 sm:p-5">
+              <h4 class="flex items-center gap-2 text-sm font-bold text-white sm:text-base">
+                <i data-lucide="table" class="h-4 w-4 text-champagne"></i>
+                <span>Bảng giá khách lẻ (hiện dạng chữ trên web)</span>
+              </h4>
+              <p class="mt-0.5 text-xs text-silver">Nhập giá bằng đồng, ví dụ 2500. Để trống ô nào thì khách thấy ô trống và nhắn Zalo hỏi giá. Cột "In" và "Ép gỗ" cũng dùng cho công cụ Ước tính nhanh.</p>
+              <form id="admin-retail-prices-form" class="mt-3 space-y-3">
+                <div id="admin-retail-prices-grid" class="overflow-x-auto rounded-xl border border-white/10"></div>
+                <div class="flex justify-end">
+                  <button type="submit" class="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl bg-champagne px-4 py-2 text-sm font-bold text-obsidian transition hover:bg-white">
+                    <i data-lucide="save" class="h-4 w-4"></i>
+                    <span>Lưu bảng giá</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+
             <!-- Part D: Before / After Comparison Photos -->
             <div class="rounded-2xl border border-white/10 bg-surface p-4 sm:p-5">
               <h4 class="flex items-center gap-2 text-sm font-bold text-white sm:text-base">
@@ -1588,8 +1630,8 @@
 
               <div class="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-4">
                 <div class="flex items-center gap-2">
-                  <label for="store-pin-input" class="text-xs font-semibold text-silver">Mã PIN:</label>
-                  <input id="store-pin-input" type="text" inputmode="numeric" maxlength="10" class="w-24 rounded-lg border border-white/15 bg-obsidian px-2.5 py-2 text-base font-bold text-white outline-none focus:border-champagne sm:py-1.5 sm:text-xs" />
+                  <label for="store-pin-input" class="text-xs font-semibold text-silver">Đổi mã PIN:</label>
+                  <input id="store-pin-input" type="password" inputmode="numeric" maxlength="12" placeholder="Để trống = giữ nguyên" class="w-44 rounded-lg border border-white/15 bg-obsidian px-2.5 py-2 text-base font-bold text-white outline-none focus:border-champagne sm:py-1.5 sm:text-xs" />
                 </div>
                 <button type="submit" class="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-champagne px-5 py-2.5 text-sm font-bold text-obsidian transition hover:bg-white sm:w-auto">
                   <i data-lucide="save" class="h-4 w-4"></i>
@@ -1748,7 +1790,7 @@
   <!--__DEFAULT_DATA_START__-->
   <script id="default-data-script">
     const DEFAULT_DATA = {
-      pin: '1234',
+      pinHash: 'f614313f6f9aef0c2a4a90158e5ba58d2f097bb94c72e56ee0da4c56afa5e34f',
       priceShowcase: {
         title: 'Bảng Giá In Hình Chính Thức',
         subtitle: 'In ảnh sắc nét là thế mạnh chủ đạo của Ảnh Màu Trường Giang. Chạm vào ảnh bảng giá bên dưới để phóng to rõ từng khổ ảnh và đặt in nhanh qua Zalo.',
@@ -1778,7 +1820,7 @@
           id: 'km-anh-the-phuc-hoi',
           badge: 'CHỈ 25.000Đ / BỘ',
           title: 'Chụp ảnh thẻ lấy liền 25.000đ/bộ — Chỉnh sửa chuyên nghiệp, chỉn chu',
-          description: 'Chụp ánh sáng studio đều đẹp, chỉnh sửa ảnh chuyên nghiệp, chỉn chu từng chi tiết (da tự nhiên, tóc và trang phục gọn gàng), đúng chuẩn hồ sơ, bằng lái, hộ chiếu.',
+          description: 'Chụp dưới ánh sáng studio đều và đẹp, chỉnh sửa ảnh chuyên nghiệp, chỉn chu từng chi tiết (da tự nhiên, tóc và trang phục gọn gàng), đúng chuẩn hồ sơ, bằng lái, hộ chiếu.',
           condition: 'Chụp lấy liền tại tiệm • Nhắn Zalo 0888 191 504 để hẹn giờ',
           active: true,
           image: '',
@@ -1940,7 +1982,51 @@
       office: 'Văn phòng',
     };
 
+    // Bảng giá khách lẻ (đồng / tấm), lấy theo bảng giá khách lẻ trong app quản lý. null = không làm / báo giá riêng.
+    const DEFAULT_RETAIL_PRICES = {
+      finishes: ['In', 'Ép plastic', 'Ép gỗ', 'Bọc viền', 'Tráng gương BV', 'Tráng gương gọng HD', 'Tráng gương gọng Titan'],
+      rows: [
+        { size: '6x9', prices: [1000, 2000, null, null, null, null, null] },
+        { size: '7x10', prices: [1500, 2500, null, null, null, null, null] },
+        { size: '9x12', prices: [2000, 3000, null, null, null, null, null] },
+        { size: '10x15', prices: [2500, 3500, null, null, null, null, null] },
+        { size: '13x18', prices: [3000, 4000, 30000, 45000, 50000, null, 60000] },
+        { size: '15x21', prices: [5000, 8000, 40000, 55000, 65000, null, 80000] },
+        { size: '20x25', prices: [15000, 25000, 50000, 75000, 80000, null, null] },
+        { size: '20x30', prices: [20000, 30000, 60000, 85000, 95000, null, 120000] },
+        { size: '25x35', prices: [30000, 40000, 80000, 110000, 125000, null, null] },
+        { size: '30x40', prices: [35000, 50000, 100000, 130000, 145000, null, null] },
+        { size: '30x45', prices: [45000, 60000, 120000, 150000, 155000, null, 180000] },
+        { size: '35x50', prices: [70000, 90000, 170000, 200000, 230000, null, null] },
+        { size: '40x60', prices: [80000, 100000, 220000, 250000, 270000, 320000, 350000] },
+        { size: '50x70', prices: [100000, 130000, 250000, 300000, 320000, null, 400000] },
+        { size: '50x75', prices: [120000, 150000, 300000, 350000, 370000, 420000, 450000] },
+        { size: '60x90', prices: [150000, 200000, 400000, 450000, 480000, 550000, 600000] },
+        { size: '70x110', prices: [200000, 280000, 500000, 550000, 600000, null, null] },
+        { size: '80x120', prices: [250000, 300000, 600000, 650000, 700000, null, null] },
+      ],
+    };
+
+    // Mã hoá PIN để không ai đọc được mã thật trong file data.json công khai.
+    async function hashPin(pin) {
+      if (!window.crypto || !window.crypto.subtle) return null;
+      const bytes = new TextEncoder().encode('tg-pin:' + pin);
+      const buf = await window.crypto.subtle.digest('SHA-256', bytes);
+      return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function checkPin(entered) {
+      if (appData.pinHash) {
+        const h = await hashPin(entered);
+        return h !== null && h === appData.pinHash;
+      }
+      return entered === (appData.pin || '1234');
+    }
+
     function normalizeAppData(parsed) {
+      if (!parsed.retailPrices || !Array.isArray(parsed.retailPrices.rows) || !Array.isArray(parsed.retailPrices.finishes)) {
+        parsed.retailPrices = clone(DEFAULT_RETAIL_PRICES);
+      }
       if (!parsed.priceShowcase || typeof parsed.priceShowcase !== 'object') {
         parsed.priceShowcase = clone(DEFAULT_DATA.priceShowcase);
       }
@@ -1996,7 +2082,7 @@
           }
         }
       } catch (e) {}
-      return clone(DEFAULT_DATA);
+      return normalizeAppData(clone(DEFAULT_DATA));
     }
 
     const GH_CFG_KEY = 'anh_mau_truong_giang_gh_cfg_v1';
@@ -2534,6 +2620,15 @@
             <p class="mt-0.5 text-sm font-medium text-white">${escapeHtml(s.address || 'Phước Hải, Bà Rịa - Vũng Tàu')}</p>
           </div>
         </div>
+        ${s.hours ? `<div class="flex items-start gap-3.5">
+          <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-obsidian text-champagne">
+            <i data-lucide="clock" class="h-4 w-4"></i>
+          </span>
+          <div>
+            <p class="text-[11px] font-bold uppercase tracking-wider text-silver">Giờ mở cửa</p>
+            <p class="mt-0.5 text-sm font-medium text-white">${escapeHtml(s.hours)}</p>
+          </div>
+        </div>` : ''}
         <div class="flex items-start gap-3.5">
           <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-obsidian text-blue-400">
             <i data-lucide="message-circle" class="h-4 w-4"></i>
@@ -2880,6 +2975,51 @@
       }
     }
 
+    function formatPriceCell(v) {
+      return v ? Number(v).toLocaleString('vi-VN') : '';
+    }
+
+    function renderRetailPriceTable() {
+      const head = document.getElementById('retail-price-head');
+      const body = document.getElementById('retail-price-body');
+      if (!head || !body) return;
+      const rp = appData.retailPrices || DEFAULT_RETAIL_PRICES;
+      head.innerHTML = `<tr>
+        <th class="sticky left-0 z-10 bg-carbon px-3 py-3 text-left">Khổ (cm)</th>
+        ${rp.finishes.map((f) => `<th class="px-3 py-3">${escapeHtml(f)}</th>`).join('')}
+      </tr>`;
+      body.innerHTML = rp.rows.map((r) => `<tr class="hover:bg-white/[0.04]">
+        <td class="sticky left-0 z-10 bg-carbon px-3 py-2.5 text-left font-bold text-champagne">${escapeHtml(r.size.replace('x', '×'))}</td>
+        ${rp.finishes.map((_, i) => `<td class="px-3 py-2.5 font-semibold text-white">${formatPriceCell(r.prices[i])}</td>`).join('')}
+      </tr>`).join('');
+    }
+
+    // Giá in lẻ / ép gỗ của công cụ ước tính lấy thẳng từ bảng giá khách lẻ, để chỉ phải sửa giá ở một chỗ.
+    const RETAIL_FINISH_FOR_CALC = { in_le: 'In', ep_go: 'Ép gỗ' };
+
+    function retailPriceFor(type, size) {
+      const finish = RETAIL_FINISH_FOR_CALC[type];
+      const rp = appData.retailPrices;
+      if (!finish || !rp) return null;
+      const col = rp.finishes.indexOf(finish);
+      const row = rp.rows.find((r) => r.size === size);
+      if (col < 0 || !row) return 0;
+      return Number(row.prices[col] || 0);
+    }
+
+    function renderCalcSizeOptions() {
+      const sel = document.getElementById('calc-size-select');
+      if (!sel) return;
+      const rp = appData.retailPrices || DEFAULT_RETAIL_PRICES;
+      const hints = { '10x15': 'Phổ biến', '13x18': 'Để bàn', '15x21': 'Khổ A5', '20x30': 'Khổ A4', '30x45': 'Treo tường', '40x60': 'Khổ lớn', '60x90': 'Phóng lớn' };
+      sel.innerHTML = rp.rows.map((r) => {
+        const label = `${r.size.replace('x', ' × ')} cm${hints[r.size] ? ` (${hints[r.size]})` : ''}`;
+        return `<option value="${escapeHtml(r.size)}">${escapeHtml(label)}</option>`;
+      }).join('');
+      if (!rp.rows.some((r) => r.size === calcState.size)) calcState.size = rp.rows[0] ? rp.rows[0].size : '10x15';
+      sel.value = calcState.size;
+    }
+
     function renderPromotions() {
       const section = document.getElementById('khuyen-mai');
       const grid = document.getElementById('promotions-grid');
@@ -3109,7 +3249,7 @@
       },
       {
         q: 'Chụp ảnh thẻ 25.000đ/bộ gồm những gì, có chỉnh sửa không?',
-        a: 'Chỉ 25.000đ cho 1 bộ ảnh thẻ lấy liền tại tiệm. Ảnh được chụp ánh sáng studio đều đẹp và chỉnh sửa chuyên nghiệp, chỉn chu (làm mịn da tự nhiên, cân sáng, chỉnh tóc và trang phục gọn gàng) đúng chuẩn hồ sơ, bằng lái, hộ chiếu, visa.',
+        a: 'Chỉ 25.000đ cho 1 bộ ảnh thẻ lấy liền tại tiệm. Ảnh được chụp dưới ánh sáng studio đều và đẹp và chỉnh sửa chuyên nghiệp, chỉn chu (làm mịn da tự nhiên, cân sáng, chỉnh tóc và trang phục gọn gàng) đúng chuẩn hồ sơ, bằng lái, hộ chiếu, visa.',
       },
       {
         q: 'Báo giá khung ảnh trang trí và khung ảnh thờ đã bao gồm hình chưa?',
@@ -3157,15 +3297,18 @@
       if (qtyInput) qtyInput.value = calcState.qty;
 
       const prices = appData.calculatorPrices || DEFAULT_DATA.calculatorPrices;
+      const fromRetail = retailPriceFor(calcState.type, calcState.size);
       const unitPrice = calcState.type === 'anh_the'
         ? Number((prices.anh_the && prices.anh_the['1bo']) || 25000)
-        : Number((prices[calcState.type] && prices[calcState.type][calcState.size]) || 0);
+        : fromRetail !== null
+          ? fromRetail
+          : Number((prices[calcState.type] && prices[calcState.type][calcState.size]) || 0);
 
       const summaryEl = document.getElementById('calc-summary-label');
       const totalEl = document.getElementById('calc-total-display');
       const hintEl = document.getElementById('calc-unit-hint');
 
-      const sizeText = calcState.type === 'anh_the' ? '1 bộ lấy liền' : `Khổ ${CALC_SIZE_LABELS[calcState.size] || calcState.size}`;
+      const sizeText = calcState.type === 'anh_the' ? '1 bộ lấy liền' : `Khổ ${CALC_SIZE_LABELS[calcState.size] || calcState.size.replace('x', '×') + ' cm'}`;
       const unitWord = calcState.type === 'anh_the' ? 'bộ' : 'tấm';
       if (summaryEl) {
         summaryEl.textContent = `${CALC_TYPE_LABELS[calcState.type]} • ${sizeText} × ${calcState.qty} ${unitWord}`;
@@ -3218,7 +3361,7 @@
       if (isId) {
         if (badgeEl) badgeEl.textContent = 'Chụp ảnh thẻ 25.000đ / bộ';
         if (titleEl) titleEl.textContent = 'Chỉnh sửa ảnh thẻ chuyên nghiệp, chỉn chu';
-        if (descEl) descEl.textContent = 'Chụp ánh sáng studio đều đẹp, chỉnh sửa tỉ mỉ từng chi tiết mà vẫn giữ trọn nét tự nhiên của khuôn mặt.';
+        if (descEl) descEl.textContent = 'Chụp dưới ánh sáng studio đều và đẹp, chỉnh sửa tỉ mỉ từng chi tiết mà vẫn giữ trọn nét tự nhiên của khuôn mặt.';
         if (pointsEl) {
           pointsEl.innerHTML = [
             'Làm mịn da tự nhiên, xóa khuyết điểm nhẹ nhàng không bị giả',
@@ -3310,10 +3453,9 @@
       const grid = document.getElementById('admin-calc-prices-grid');
       if (!grid) return;
       const prices = appData.calculatorPrices || DEFAULT_DATA.calculatorPrices;
+      // In ảnh lẻ và Ép ảnh gỗ lấy giá từ "Bảng giá khách lẻ" bên dưới, không nhập ở đây nữa.
       const groups = [
-        { key: 'in_le', label: 'In ảnh lẻ (VNĐ / tấm)' },
         { key: 'khung_hinh', label: 'Trọn bộ Hình + Khung (VNĐ / bộ)' },
-        { key: 'ep_go', label: 'Ép ảnh gỗ (VNĐ / tấm)' },
       ];
       const sizes = ['10x15', '13x18', '15x21', '20x30', '30x45', '40x60', '60x90'];
       grid.innerHTML = groups.map((g) => `
@@ -3337,6 +3479,22 @@
           </label>
         </div>
       `;
+    }
+
+    function renderAdminRetailPrices() {
+      const wrap = document.getElementById('admin-retail-prices-grid');
+      if (!wrap) return;
+      const rp = appData.retailPrices || DEFAULT_RETAIL_PRICES;
+      wrap.innerHTML = `<table class="w-full min-w-[720px] text-xs">
+        <thead><tr class="text-silver">
+          <th class="sticky left-0 bg-surface px-2 py-2 text-left">Khổ</th>
+          ${rp.finishes.map((f) => `<th class="px-1.5 py-2 text-left font-semibold">${escapeHtml(f)}</th>`).join('')}
+        </tr></thead>
+        <tbody>${rp.rows.map((r, ri) => `<tr>
+          <td class="sticky left-0 bg-surface px-2 py-1 font-bold text-champagne">${escapeHtml(r.size)}</td>
+          ${rp.finishes.map((_, fi) => `<td class="px-1 py-1"><input type="number" min="0" step="1" data-rp-row="${ri}" data-rp-col="${fi}" value="${r.prices[fi] || ''}" placeholder="—" class="w-full min-w-[78px] rounded-lg border border-white/15 bg-carbon px-2 py-1.5 text-base text-white outline-none focus:border-champagne sm:text-xs" /></td>`).join('')}
+        </tr>`).join('')}</tbody>
+      </table>`;
     }
 
     function renderStandeeCanvas(targetCanvas, urlText, scale = 1) {
@@ -3460,6 +3618,8 @@
     function renderAll() {
       renderStoreIdentity();
       renderPriceShowcase();
+      renderRetailPriceTable();
+      renderCalcSizeOptions();
       renderCalculator();
       renderPromotions();
       renderBeforeAfter();
@@ -3475,6 +3635,7 @@
         renderAdminPromoList();
         populatePromoEditor();
         renderAdminCalcPrices();
+        renderAdminRetailPrices();
         renderAdminServiceList();
         populateServiceEditor();
         populateStoreForm();
@@ -3721,7 +3882,7 @@
       document.getElementById('store-gmail-input').value = s.gmail || '';
       document.getElementById('store-fb-input').value = s.facebook || '';
       document.getElementById('store-maps-input').value = s.mapsUrl || '';
-      document.getElementById('store-pin-input').value = appData.pin || '1234';
+      document.getElementById('store-pin-input').value = '';
 
       const wrap = document.getElementById('hero-photo-preview-wrap');
       const removeBtn = document.getElementById('remove-hero-photo-btn');
@@ -4035,10 +4196,10 @@
         if (window.location.hash === '#admin') openAdminModal('services');
       });
 
-      document.getElementById('admin-pin-form').addEventListener('submit', (e) => {
+      document.getElementById('admin-pin-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const entered = document.getElementById('admin-pin-input').value.trim();
-        if (entered === (appData.pin || '1234')) {
+        if (await checkPin(entered)) {
           adminUnlocked = true;
           populateGithubForm();
           const quickPub = document.getElementById('admin-quick-publish-btn');
@@ -4138,7 +4299,7 @@
         showToast('Đã gỡ ảnh bìa trang chủ.');
       });
 
-      document.getElementById('admin-store-form').addEventListener('submit', (e) => {
+      document.getElementById('admin-store-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         appData.store.name = document.getElementById('store-name-input').value.trim() || 'Ảnh Màu Trường Giang';
         appData.store.location = document.getElementById('store-location-input').value.trim();
@@ -4150,7 +4311,15 @@
         appData.store.facebook = document.getElementById('store-fb-input').value.trim();
         appData.store.mapsUrl = document.getElementById('store-maps-input').value.trim();
         const newPin = document.getElementById('store-pin-input').value.trim();
-        if (newPin) appData.pin = newPin;
+        if (newPin) {
+          const h = await hashPin(newPin);
+          if (h) {
+            appData.pinHash = h;
+            delete appData.pin;
+          } else {
+            showToast('Trình duyệt này không đổi được PIN. Hãy mở web bằng đường link https để đổi.');
+          }
+        }
         saveData();
         renderAll();
         showToast('Đã lưu thông tin tiệm!');
@@ -4389,6 +4558,21 @@
         saveData();
         renderCalculator();
         showToast('Đã lưu đơn giá cho công cụ ước tính nhanh!');
+      });
+
+      // Lưu bảng giá khách lẻ
+      document.getElementById('admin-retail-prices-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!appData.retailPrices) appData.retailPrices = clone(DEFAULT_RETAIL_PRICES);
+        document.querySelectorAll('[data-rp-row]').forEach((inp) => {
+          const row = appData.retailPrices.rows[Number(inp.getAttribute('data-rp-row'))];
+          if (!row) return;
+          const v = parseInt(inp.value, 10);
+          row.prices[Number(inp.getAttribute('data-rp-col'))] = v > 0 ? v : null;
+        });
+        saveData();
+        renderAll();
+        showToast('Đã lưu bảng giá. Bấm "Cập nhật thẳng lên web" để khách thấy giá mới.');
       });
 
       // Admin Before / After photo uploads
